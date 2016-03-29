@@ -1,8 +1,9 @@
 # LeagueOfGeeks
-CS 4460
+Georgia Tech
+CS 4460: Information Visualization
 
 
 Members:
-  Andrew Ford
+  Andrew Ford, Shotaro Watanabe
   
   add your name
