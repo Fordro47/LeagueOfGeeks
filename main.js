@@ -1,8 +1,3 @@
-
-
-
-
-
 var margin = {top: 50, right: 0, bottom: 30, left: 0};
 var width = 900 - margin.left - margin.right;
 var height = 800 - margin.top - margin.bottom;
@@ -12,7 +7,7 @@ var sizeForCircle = function(d) {
   // Say from .43 to .57 scale to 5 - 20
   return (d.winRate * d.winRate) * 60;
 }
-//TODO: DYNAMICALLY CHANGE Y AXIS DEPENDING ON WHAT IS CLICKED
+// TODO: DYNAMICALLY CHANGE Y AXIS DEPENDING ON WHAT IS CLICKED
 // setup x
 var xValue = function(d) { return d.Kills;}, // data -> value
     xScale = d3.scale.linear().range([0, width]), // value -> display
@@ -45,9 +40,7 @@ var tooltip = d3.select("body").append("div")
 var statChoice = document.getElementById('selectElementId');
 // load data
 d3.csv("league_data.csv", function(error, data) {
-
-
-
+  
   // change string (from CSV) into number format
   data.forEach(function(d) {
     d.Role = d["Role"];
@@ -68,29 +61,31 @@ d3.csv("league_data.csv", function(error, data) {
 
   //TODO: NEED TO DYNAMICALLY SWITCH VALUES ONCE CHOICE IN DROP DOWN MENU IS CLICKED
 
-  // switch(stat){
+  // switch(stat) {
+  //   // status changed to damage dealt champ
   //   case "damageDealt":
   //     console.log("damageDealt");
   //     yChoice = d.averageDamage;
   //     yChoiceText = "Avg. Damage Dealt";
   //     break;
-
+  //   // status changed to gold earned
   //   case "goldEarned":
   //     console.log("goldEarned");
   //     yChoice = d.Gold;
   //     yChoiceText = "Gold Earned";
   //     break;
-
+  //   // status changed to kda
   //   case "kda":
   //     console.log("kda");
-  //     yChoice = ((d.Kills + d.Assists)/d.Deaths);
+  //     yChoice = ((d.Kills + d.Assists) / d.Deaths);
   //     yChoiceText = "KDA";
   //     break;
-
   // }
+
   // don't want dots overlapping axis, so add in buffer to data domain
   xScale.domain([d3.min(data, xValue)-1, d3.max(data, xValue)+1]);
   yScale.domain([d3.min(data, yValue)-1, d3.max(data, yValue)+1]);
+
   // svg.append('p')
   //     .append('button')
   //     .text('Update')
