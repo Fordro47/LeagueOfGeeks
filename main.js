@@ -7,37 +7,9 @@ var sizeForCircle = function(d) {
   // Say from .43 to .57 scale to 5 - 20
   return (d.winRate * d.winRate) * 60;
 }
-// TODO: DYNAMICALLY CHANGE Y AXIS DEPENDING ON WHAT IS CLICKED
-// setup x
-var xValue = function(d) { return d.Kills;}, // data -> value
-    xScale = d3.scale.linear().range([0, width]), // value -> display
-    xMap = function(d) { return xScale(xValue(d));}, // data -> display
-    xAxis = d3.svg.axis().scale(xScale).orient("bottom");
-
-// setup y
-var yValue = function(d) { return d.Gold;}, // data -> value
-    yScale = d3.scale.linear().range([height, 0]), // value -> display
-    yMap = function(d) { return yScale(yValue(d));}, // data -> display
-    yAxis = d3.svg.axis().scale(yScale).orient("left");
-
-// setup fill color
-var cValue = function(d) { return d.Role;},
-    color = d3.scale.category10();
-
-// add the graph canvas to the body of the webpage
-var svg = d3.select(".scatterplot").append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
-    .append("g")
-    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-// add the tooltip area to the webpage
-var tooltip = d3.select("body").append("div")
-    .attr("class", "tooltip")
-    .style("opacity", 0);
 
 //Gets the value of the drop down menu
-var statChoice = document.getElementById('selectElementId');
+//var statChoice = document.getElementById('selectElementId');
 // load data
 d3.csv("league_data.csv", function(error, data) {
   
@@ -54,55 +26,59 @@ d3.csv("league_data.csv", function(error, data) {
     d.averageDamage = +d["Damage Dealt"];
   });
 
-  var stat = statChoice.options[statChoice.selectedIndex].value;
-  var yChoice = null;
-  var yChoiceText = stat;
-  console.log(stat);
+  var scatterplot = d3.select(".scatterplot")
+  var selectData = [ { "text" : "Gold" },
+                       { "text" : "Deaths" },
+                       { "text" : "Assists" },
+                     ]
 
-  //TODO: NEED TO DYNAMICALLY SWITCH VALUES ONCE CHOICE IN DROP DOWN MENU IS CLICKED
+ // Select Y-axis Variable
+  var span = scatterplot.append('span')   
+      .text('Select Y-Axis Variable: ')
+  var ySelect = scatterplot.append('select')
+      .attr('class','ySelect')
+      .on('change',yChange)
+    .selectAll('option')
+      .data(selectData)
+      .enter()
+    .append('option')
+      .attr('value', function (d) { return d.text })
+      .text(function (d) { return d.text ;})
+  scatterplot.append('br')
 
-  // switch(stat) {
-  //   // status changed to damage dealt champ
-  //   case "damageDealt":
-  //     console.log("damageDealt");
-  //     yChoice = d.averageDamage;
-  //     yChoiceText = "Avg. Damage Dealt";
-  //     break;
-  //   // status changed to gold earned
-  //   case "goldEarned":
-  //     console.log("goldEarned");
-  //     yChoice = d.Gold;
-  //     yChoiceText = "Gold Earned";
-  //     break;
-  //   // status changed to kda
-  //   case "kda":
-  //     console.log("kda");
-  //     yChoice = ((d.Kills + d.Assists) / d.Deaths);
-  //     yChoiceText = "KDA";
-  //     break;
-  // }
+  // add the graph canvas to the body of the webpage
+  var svg = d3.select(".scatterplot").append("svg")
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height + margin.top + margin.bottom)
+      .append("g")
+      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+  // add the tooltip area to the webpage
+  var tooltip = d3.select("body").append("div")
+      .attr("class", "tooltip")
+      .style("opacity", 0);
+  
+  // TODO: DYNAMICALLY CHANGE Y AXIS DEPENDING ON WHAT IS CLICKED
+  // setup x
+  var xValue = function(d) { return d.Kills;}, // data -> value 
+      xScale = d3.scale.linear().domain([d3.min(data, xValue)-1, d3.max(data, xValue)+1]).range([0, width]), // value -> display
+      xMap = function(d) { return xScale(xValue(d));}, // data -> display
+      xAxis = d3.svg.axis().scale(xScale).orient("bottom");
+
+  // setup y
+  var yValue = function(d) { return d.Gold;}, // data -> value
+      yScale = d3.scale.linear().domain([d3.min(data, yValue)-1, d3.max(data, yValue)+1]).range([height, 0]), // value -> display
+      yMap = function(d) { return yScale(yValue(d));}, // data -> display
+      yAxis = d3.svg.axis().scale(yScale).orient("right");
+
+  // setup fill color
+  var cValue = function(d) { return d.Role;},
+      color = d3.scale.category10();
+
 
   // don't want dots overlapping axis, so add in buffer to data domain
-  xScale.domain([d3.min(data, xValue)-1, d3.max(data, xValue)+1]);
-  yScale.domain([d3.min(data, yValue)-1, d3.max(data, yValue)+1]);
-
-  // svg.append('p')
-  //     .append('button')
-  //     .text('Update')
-  //     .on("click", function(d){
-  //         svg.append("g")
-  //           .attr("class", "y axis")
-  //           .attr("fill", "white")
-  //           .call(yAxis)
-  //         .append("text")
-  //           .attr("class", "label")
-  //           .attr("transform", "rotate(-90)")
-  //           .attr("y", 6)
-  //           .attr("dy", ".71em")
-  //           .attr("fill", "white")
-  //           .style("text-anchor", "end")
-  //           .text(yChoiceText);
-  //    });
+ // xScale.domain([d3.min(data, xValue)-1, d3.max(data, xValue)+1]);
+ // yScale.domain([d3.min(data, yValue)-1, d3.max(data, yValue)+1]);
 
   // x-axis
   svg.append("g")
@@ -121,16 +97,19 @@ d3.csv("league_data.csv", function(error, data) {
   // y-axis
   svg.append("g")
       .attr("class", "y axis")
+      .attr('id' , 'yAxis')
       .attr("fill", "white")
       .call(yAxis)
     .append("text")
-      .attr("class", "label")
-      .attr("transform", "rotate(-90)")
-      .attr("y", 6)
+      .attr('id', 'yAxisLabel')
+      .attr("y", -15)
+      .attr("x", 40)
       .attr("dy", ".71em")
       .attr("fill", "white")
       .style("text-anchor", "end")
-      .text(yChoiceText);
+      .text("Gold");
+
+
 
   // draw dots
   svg.selectAll(".dot")
@@ -165,6 +144,24 @@ d3.csv("league_data.csv", function(error, data) {
         //TODO
       });
 
+  // Dynamic update y-axis variable
+  function yChange() {
+    var value = this.value // get the new y value
+    var yValue = function(d) { return d[value];};
+    yScale // change the yScale
+      .domain([d3.min(data, yValue)-1, d3.max(data, yValue)+1])
+    yAxis.scale(yScale) // change the yScale
+    d3.select('#yAxis') // redraw the yAxis
+      .transition().duration(500)
+      .call(yAxis)
+    d3.select('#yAxisLabel') // change the yAxisLabel
+      .text(value)    
+    d3.selectAll('circle') // move the circles
+      .transition().duration(500)
+      .delay(function (d,i) { return i*50})
+        .attr('cy',function (d) { return yScale(d[value]) })
+  }
+
   // draw legend
   var legend = svg.selectAll(".legend")
       .data(color.domain())
@@ -187,4 +184,7 @@ d3.csv("league_data.csv", function(error, data) {
       .attr("fill", "white")
       .style("text-anchor", "end")
       .text(function(d) { return d;});
+
+
+
 });
