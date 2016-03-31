@@ -1,4 +1,4 @@
-var margin = {top: 50, right: 0, bottom: 30, left: 0};
+var margin = {top: 50, right: 20, bottom: 30, left: 20};
 var width = 900 - margin.left - margin.right;
 var height = 800 - margin.top - margin.bottom;
 
@@ -23,13 +23,22 @@ d3.csv("league_data.csv", function(error, data) {
     d.Deaths = +d.Deaths;
     d.Assists = +d.Assists;
     d.KDA = +((d.Kills + d.Assists)/d.Deaths);
-    d.averageDamage = +d["Damage Dealt"];
+    d.DMG_Dealt = +d["Damage Dealt"];
+    d.DMG_Taken = +d["Damage Taken"];
+    d.Minions = +d["Minions Killed"];
+    d.Healing = +d["Total Healing"];
   });
 
   var scatterplot = d3.select(".scatterplot")
   var selectData = [ { "text" : "Gold" },
+                       { "text" : "Kills" },
                        { "text" : "Deaths" },
                        { "text" : "Assists" },
+                       { "text" : "DMG_Dealt" },
+                       { "text" : "DMG_Taken" },
+                       { "text" : "KDA" },
+                       { "text" : "Minions" },
+                       { "text" : "Healing" },
                      ]
 
  // Select Y-axis Variable
@@ -38,6 +47,20 @@ d3.csv("league_data.csv", function(error, data) {
   var ySelect = scatterplot.append('select')
       .attr('class','ySelect')
       .on('change',yChange)
+    .selectAll('option')
+      .data(selectData)
+      .enter()
+    .append('option')
+      .attr('value', function (d) { return d.text })
+      .text(function (d) { return d.text ;})
+  scatterplot.append('br')
+
+  // Select X-axis Variable
+  var span = scatterplot.append('span')   
+      .text('Select X-Axis Variable: ')
+  var xSelect = scatterplot.append('select')
+      .attr('class','xSelect')
+      .on('change',xChange)
     .selectAll('option')
       .data(selectData)
       .enter()
@@ -60,7 +83,7 @@ d3.csv("league_data.csv", function(error, data) {
   
   // TODO: DYNAMICALLY CHANGE Y AXIS DEPENDING ON WHAT IS CLICKED
   // setup x
-  var xValue = function(d) { return d.Kills;}, // data -> value 
+  var xValue = function(d) { return d.Gold;}, // data -> value 
       xScale = d3.scale.linear().domain([d3.min(data, xValue)-1, d3.max(data, xValue)+1]).range([0, width]), // value -> display
       xMap = function(d) { return xScale(xValue(d));}, // data -> display
       xAxis = d3.svg.axis().scale(xScale).orient("bottom");
@@ -83,16 +106,17 @@ d3.csv("league_data.csv", function(error, data) {
   // x-axis
   svg.append("g")
       .attr("class", "x axis")
+      .attr('id', 'xAxis')
       .attr("transform", "translate(0," + height + ")")
       .attr("fill", "white")
       .call(xAxis)
     .append("text")
-      .attr("class", "label")
+      .attr('id', 'xAxisLabel')
       .attr("x", width)
       .attr("y", -6)
       .attr("fill", "white")
       .style("text-anchor", "end")
-      .text("Kills");
+      .text("Gold");
 
   // y-axis
   svg.append("g")
@@ -103,7 +127,7 @@ d3.csv("league_data.csv", function(error, data) {
     .append("text")
       .attr('id', 'yAxisLabel')
       .attr("y", -15)
-      .attr("x", 40)
+      .attr("x", 65)
       .attr("dy", ".71em")
       .attr("fill", "white")
       .style("text-anchor", "end")
@@ -161,6 +185,24 @@ d3.csv("league_data.csv", function(error, data) {
       .delay(function (d,i) { return i*50})
         .attr('cy',function (d) { return yScale(d[value]) })
   }
+  // Dynamic update x-axis variable
+  function xChange() {
+    var value = this.value // get the new x value
+    var xValue = function(d) { return d[value];};
+    xScale // change the xScale
+      .domain([d3.min(data, xValue)-1, d3.max(data, xValue)+1])
+    xAxis.scale(xScale) // change the xScale
+    d3.select('#xAxis') // redraw the xAxis
+      .transition().duration(500)
+      .call(xAxis)
+    d3.select('#xAxisLabel') // change the xAxisLabel
+      .transition().duration(500)
+      .text(value)
+    d3.selectAll('circle') // move the circles
+      .transition().duration(500)
+      .delay(function (d,i) { return i*50})
+        .attr('cx',function (d) { return xScale(d[value]) })
+  }
 
   // draw legend
   var legend = svg.selectAll(".legend")
@@ -172,6 +214,7 @@ d3.csv("league_data.csv", function(error, data) {
   // draw legend colored rectangles
   legend.append("rect")
       .attr("x", width - 18)
+      .attr("y", -53)
       .attr("width", 18)
       .attr("height", 18)
       .style("fill", color);
@@ -179,7 +222,7 @@ d3.csv("league_data.csv", function(error, data) {
   // draw legend text
   legend.append("text")
       .attr("x", width - 24)
-      .attr("y", 9)
+      .attr("y", -45)
       .attr("dy", ".35em")
       .attr("fill", "white")
       .style("text-anchor", "end")
