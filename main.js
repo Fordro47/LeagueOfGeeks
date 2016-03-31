@@ -19,6 +19,7 @@ d3.csv("league_data.csv", function(error, data) {
     d.Name = d["Champion"];
     d.Gold = +d["Gold Earned"];
     d.winRate = +d["Win Percent"];
+    d.playRate = +d["Play Percent"];
     d.Kills = +d.Kills;
     d.Deaths = +d.Deaths;
     d.Assists = +d.Assists;
@@ -151,8 +152,8 @@ d3.csv("league_data.csv", function(error, data) {
             .style("opacity", 0.9);
           tooltip.html("Champion Name: " + d.Name + "<br/>"
             + "Role: " + d.Role + "<br/>"
-            + "Kills: " + d.Kills + "<br/>"
-            + "Gold: " + d.Gold + "g")
+            + "Win Rate: " + d.winRate + "<br/>"
+            + "Play Rate: " + d.playRate + "g")
             .style("left", (d3.event.pageX) +"px")
             .style("top", (d3.event.pageY - 28) +"px");
       })
