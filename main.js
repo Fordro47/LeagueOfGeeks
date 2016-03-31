@@ -1,4 +1,4 @@
-var margin = {top: 50, right: 20, bottom: 30, left: 20};
+var margin = {top: 50, right: 20, bottom: 30, left: 80};
 var width = 900 - margin.left - margin.right;
 var height = 800 - margin.top - margin.bottom;
 
@@ -92,7 +92,7 @@ d3.csv("league_data.csv", function(error, data) {
   var yValue = function(d) { return d.Gold;}, // data -> value
       yScale = d3.scale.linear().domain([d3.min(data, yValue)-1, d3.max(data, yValue)+1]).range([height, 0]), // value -> display
       yMap = function(d) { return yScale(yValue(d));}, // data -> display
-      yAxis = d3.svg.axis().scale(yScale).orient("right");
+      yAxis = d3.svg.axis().scale(yScale).orient("left");
 
   // setup fill color
   var cValue = function(d) { return d.Role;},
@@ -127,7 +127,7 @@ d3.csv("league_data.csv", function(error, data) {
     .append("text")
       .attr('id', 'yAxisLabel')
       .attr("y", -15)
-      .attr("x", 65)
+      .attr("x", 20)
       .attr("dy", ".71em")
       .attr("fill", "white")
       .style("text-anchor", "end")
