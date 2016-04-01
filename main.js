@@ -45,7 +45,7 @@ d3.csv("league_data.csv", function(error, data) {
                        { "text" : "Middle" },
                        { "text" : "Support" },
                        { "text" : "Jungle" },
-                       { "text" : "ADCs" },
+                       { "text" : "ADC" },
                        { "text" : "Show All" },
                      ]
 
