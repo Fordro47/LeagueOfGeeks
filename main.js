@@ -96,6 +96,7 @@ d3.csv("league_data.csv", function(error, data) {
       .attr("width", width + margin.left + margin.right)
       .attr("height", height + margin.top + margin.bottom)
       .append("g")
+        //.call(d3.behavior.zoom().x(xValue).y(yValue).scaleExtent([1, 8]).on("zoom", zoom))
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
   // add the tooltip area to the webpage
@@ -247,6 +248,14 @@ d3.csv("league_data.csv", function(error, data) {
           .attr("visibility", "visible")
     }
   }
+
+  // function zoom() {
+  //   circle.attr("transform", transform);
+  // }
+
+  // function transform(d) {
+  //   return "translate(" + xValue(d[0]) + "," + yValue(d[1]) + ")";
+  // }
 
   // draw legend
   var legend = svg.selectAll(".legend")
