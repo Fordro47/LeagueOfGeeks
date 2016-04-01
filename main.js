@@ -46,6 +46,7 @@ d3.csv("league_data.csv", function(error, data) {
                        { "text" : "Support" },
                        { "text" : "Jungle" },
                        { "text" : "ADCs" },
+                       { "text" : "Show All" },
                      ]
 
  // Select Y-axis Variable
@@ -170,10 +171,10 @@ d3.csv("league_data.csv", function(error, data) {
         tooltip.transition()
             .duration(200)
             .style("opacity", 0.9);
-          tooltip.html("Champion Name: " + d.Name + "<br/>"
+          tooltip.html("Champion: " + d.Name + "<br/>"
             + "Role: " + d.Role + "<br/>"
-            + "Win Rate: " + d.winRate + "<br/>"
-            + "Play Rate: " + d.playRate + "g")
+            + "Win Rate: " + (d.winRate*100).toPrecision(3) + "%" + "<br/>"
+            + "Play Rate: " + (d.playRate*100).toPrecision(3) + "%")
             .style("left", (d3.event.pageX) +"px")
             .style("top", (d3.event.pageY - 28) +"px");
       })
@@ -228,15 +229,23 @@ d3.csv("league_data.csv", function(error, data) {
 // Role Filtering
   function roleChange() {
     var value = this.value
-    d3.selectAll("circle")
+    if (value == "Show All"){
+      d3.selectAll("circle")
       .transition().duration(500)
       .delay(function (d,i) { return i*10})
-      .attr("visibility", "hidden")
-    d3.selectAll("circle")
-      .filter( function(d) { return d.Role == value })
+      .attr("visibility", "visible")
+    }
+    else{
+      d3.selectAll("circle")
         .transition().duration(500)
-        .delay(function (d,i) { return i*40})
-        .attr("visibility", "visible")
+        .delay(function (d,i) { return i*10})
+        .attr("visibility", "hidden")
+      d3.selectAll("circle")
+        .filter( function(d) { return d.Role == value })
+          .transition().duration(500)
+          .delay(function (d,i) { return i*40})
+          .attr("visibility", "visible")
+    }
   }
 
   // draw legend
