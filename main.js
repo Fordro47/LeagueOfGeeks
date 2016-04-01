@@ -41,6 +41,12 @@ d3.csv("league_data.csv", function(error, data) {
                        { "text" : "Minions" },
                        { "text" : "Healing" },
                      ]
+  var selectRoleData = [ { "text" : "Top" },
+                       { "text" : "Middle" },
+                       { "text" : "Support" },
+                       { "text" : "Jungle" },
+                       { "text" : "ADCs" },
+                     ]
 
  // Select Y-axis Variable
   var span = scatterplot.append('span')   
@@ -64,6 +70,20 @@ d3.csv("league_data.csv", function(error, data) {
       .on('change',xChange)
     .selectAll('option')
       .data(selectData)
+      .enter()
+    .append('option')
+      .attr('value', function (d) { return d.text })
+      .text(function (d) { return d.text ;})
+  scatterplot.append('br')
+
+  //Filter Role
+  var span = scatterplot.append('span')
+      .text('Select Role to Filter by: ')
+  var roleSelect = scatterplot.append('select')
+      .attr('class', 'roleSelect')
+      .on('change', roleChange)
+    .selectAll('option')
+      .data(selectRoleData)
       .enter()
     .append('option')
       .attr('value', function (d) { return d.text })
@@ -183,7 +203,7 @@ d3.csv("league_data.csv", function(error, data) {
       .text(value)    
     d3.selectAll('circle') // move the circles
       .transition().duration(500)
-      .delay(function (d,i) { return i*50})
+      .delay(function (d,i) { return i*40})
         .attr('cy',function (d) { return yScale(d[value]) })
   }
   // Dynamic update x-axis variable
@@ -201,8 +221,22 @@ d3.csv("league_data.csv", function(error, data) {
       .text(value)
     d3.selectAll('circle') // move the circles
       .transition().duration(500)
-      .delay(function (d,i) { return i*50})
+      .delay(function (d,i) { return i*40})
         .attr('cx',function (d) { return xScale(d[value]) })
+  }
+
+// Role Filtering
+  function roleChange() {
+    var value = this.value
+    d3.selectAll("circle")
+      .transition().duration(500)
+      .delay(function (d,i) { return i*10})
+      .attr("visibility", "hidden")
+    d3.selectAll("circle")
+      .filter( function(d) { return d.Role == value })
+        .transition().duration(500)
+        .delay(function (d,i) { return i*40})
+        .attr("visibility", "visible")
   }
 
   // draw legend
