@@ -3,13 +3,24 @@ League of Legends, or LoL, is a free multiplayer online battle video game for th
 In Leauge of Legends, players are assigned to their individual roles, and they use characters called champions. All champions have their unique characteristics and players have to buy items with the gold they earned in each game. The difference of this game from the other game is that every item will be gone after each game so that earning gold during the game is very important. Also, the strength of each champion varies because parameters of each champion are changing over time with updates.
 
 Here, we are going to explain what the parameters we included in the information visualization, and why those are important for users. 
+
 First is gold. The amount of gold earned by the champion is very important for this game since user have to earn gold at every game to buy items.
+7:17 - 7:27
 Second are kill, death, and assist. These three components are important to recognize specific champions' strengths and weaknesses.
-Third are damage dealt with and taken by champions. This is very important to know to measure whether that champion was actually successful in the game as a member of the team. 
+30:50 - 31:03
+Third are damage dealt with and taken by champions. This is very important to know to measure whether that champion was actually successful in the game as a member of the 
+team. 
+8:39 - 8:49
 Fourth is KDA. This is an average of kill, death, and assist. KDA is important to determine champions current win rate.
+40:15 - 40:25
 Fifth is minions. This is a number of minions that champion killed. This is crucial since killing minions are the main source to earn gold.
+31:50 - 32:00
 Sixth is healing. This is important to specify how much amount that champion healed.
-The last one is a role. Every champion has recommended roles so that being able to filter by the role of champions are very important.
+10:30 - 10:40
+Seventh is a role. Every champion has recommended roles so that being able to filter by the role of champions are very important.
+10:58 - 11:08
+The last one is items. Every items purchased during the game will be reset after the game, so that the purchase order and selection of items are crucial in this game.
+37:30 - 37:40
 
 ****TODO****
 WRITE SCRIPTS AFTER CODING IS DONE
