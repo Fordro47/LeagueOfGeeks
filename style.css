@@ -46,12 +46,15 @@ h2 {
 }
 
 .scatterplot {
-  float: left;
+  border: 1px solid red;
+}
+
+.piechart {
+  border: 1px solid red;
 }
 
 .wrap {
-  width: 1050px;
-  margin: 0 auto 0;
+  display: flex;
 }
 
 table {
