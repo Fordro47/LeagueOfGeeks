@@ -8,7 +8,7 @@ All champions have their unique abilities and players have to buy items with the
 
 This game is being played by 27 million people per day as of 2014, which makes it one of the most popular games around the world. League of Legends has one of the most widespread and popular E-sports scenes with tournaments and championships being hosted all over the world. With a game this big, there is a massive amount of data on the game that is useful to both players and developers. (18 sec)
 
-We designed and developed an information visualization that players can utilize to get information to help provide better experiences. Now, we are going to explain what the parameters we included in the information visualization, and why those are important for users. 
+We designed and developed an information visualization that players can utilize to get information to help provide better experiences. Now, we are going to explain what the parameters we included in the information visualization, and why those are important for users. (14 sec)
 
 First is gold. The amount of gold earned by the champion is very important for this game since players need gold to buy items that increase their strength throughout the match.(10 sec)
 7:17 - 7:27
@@ -28,7 +28,7 @@ The last one is items. Items have a huge effect on the power and usefulness of y
 37:30 - 37:40
 
 
-Our main visualization is a bubble chart in which each bubble represents a champion in the game and carries statistics along with it. The x and y axis can be changed to show many of the different pieces of game data I have described. The size of bubble shows the win rate for that champion. The bubbles are also color coded based on their role, indicated in the legend, and can be filtered based on the role. Each bubble also has a tooltip when you hover over it that tells you which champion it is along with other statistics.  
+Our main visualization is a bubble chart in which each bubble represents a champion in the game and carries statistics along with it. The x and y axis can be changed to show many of the different pieces of game data I have described. The size of bubble shows the win rate for that champion. The bubbles are also color coded based on their role, indicated in the legend, and can be filtered based on the role. Each bubble also has a tooltip when you hover over it that tells you which champion it is along with other statistics.
 
 Our second visualization can be activated by clicking on a bubble. Clicking on a bubble will bring up a pie chart of the 6 most purchased items for that champion. 
 
