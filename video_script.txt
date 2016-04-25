@@ -1,26 +1,30 @@
-League of Legends is a free to play MOBA style game. MOBA stands for multiplayer online battle arena. Players take the role of a champion and the goal of the game is to destroy the enemy teams nexus, which requires destroying other structures to get there. In League of Legends, players are assigned to their individual roles: top, mid, jungle, adc, and support. (**show a map with the different roles labeled**), All champions have their unique abilities and players have to buy items with the gold they earned in each game. Also, the strength of each champion varies due to champion changes over time through updates and reworks.
-  
+League of Legends is a free to play MOBA style game. (3 sec)
 
-This game is being played by 27 million people per day as of 2014, which makes it one of the most popular games around the world. League of Legends has one of the most widespread and popular E-sports scenes with tournaments and championships being hosted all over the world. With a game this big, there is a massive amount of data on the game that is useful to both players and developers.
+MOBA stands for multiplayer online battle arena. Players take the role of a champion and the goal of the game is to destroy the enemy teams nexus, which requires destroying other structures to get there.(12 sec)
 
+In League of Legends, players are assigned to their individual roles: top, mid, jungle, adc, and support. (**show a map with the different roles labeled**)(7 sec)
+
+All champions have their unique abilities and players have to buy items with the gold they earned in each game. Also, the strength of each champion varies due to champion changes over time through updates and reworks.(13 sec)
+
+This game is being played by 27 million people per day as of 2014, which makes it one of the most popular games around the world. League of Legends has one of the most widespread and popular E-sports scenes with tournaments and championships being hosted all over the world. With a game this big, there is a massive amount of data on the game that is useful to both players and developers. (18 sec)
 
 We designed and developed an information visualization that players can utilize to get information to help provide better experiences. Now, we are going to explain what the parameters we included in the information visualization, and why those are important for users. 
 
-First is gold. The amount of gold earned by the champion is very important for this game since players need gold to buy items that increase their strength throughout the match.
+First is gold. The amount of gold earned by the champion is very important for this game since players need gold to buy items that increase their strength throughout the match.(10 sec)
 7:17 - 7:27
-Second are kill, death, and assist. These three components are important to recognize specific champions' strengths and weaknesses.
-30:50 - 31:03
-Third is damage dealt with and taken by champions. This is useful in identifying whether or not that champion was actually successful in the game as a member of the team. 
+Second are kill, death, and assist. These three components are important to recognize specific champions' strengths and weaknesses.(10 sec)
+30:50 - 31:00
+Third is damage dealt with and taken by champions. This is useful in identifying whether or not that champion was actually successful in the game as a member of the team. (10 sec)
 8:39 - 8:49
-Fourth is KDA. This is an average of kill, death, and assist. KDA is important to determine champions current win rate.
-40:15 - 40:25
-Fifth is the number of minions killed.  This is crucial since killing minions are one of the main sources for earning gold.
+Fourth is KDA. This is an average of kill, death, and assist. KDA is important to determine champions current win rate.(15 sec)
+40:15 - 40:30
+Fifth is the number of minions killed.  This is crucial since killing minions are one of the main sources for earning gold.(10 sec)
 31:50 - 32:00
-Sixth is healing. This is important to specify how much that champion healed and if certain champions have too much or too little healing power.
+Sixth is healing. This is important to specify how much that champion healed and if certain champions have too much or too little healing power.(10 sec)
 10:30 - 10:40
-Seventh is a role. The role is what part of the map the champion primarily plays on. Every champion has recommended roles so that being able to filter by the role of champions are very important.
+Seventh is a role. The role is what part of the map the champion primarily plays on. Every champion has recommended roles so that being able to filter by the role of champions are very important.(10 sec)
 10:58 - 11:08
-The last one is items. Items have a huge effect on the power and usefulness of your champion. A big portion of the strategy in League of Legends is crafting item builds for champions and roles. Ever items purchased during the game will be reset after the game, so that the purchase order and selection of items are crucial.
+The last one is items. Items have a huge effect on the power and usefulness of your champion. A big portion of the strategy in League of Legends is crafting item builds for champions and roles. Ever items purchased during the game will be reset after the game, so that the purchase order and selection of items are crucial.(10 sec)
 37:30 - 37:40
 
 
