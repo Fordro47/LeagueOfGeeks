@@ -1,26 +1,52 @@
-League of Legends, or LoL, is a free multiplayer online battle video game for the computers. This game is being played 27 million per day in 2014, which is the most popular game around the world. We designed and developed an information visualization that players can utilize to get better experiences.
+League of Legends is a free to play MOBA style game. MOBA stands for multiplayer online battle arena. Players take the role of a champion and the goal of the game is to destroy the enemy teams nexus, which requires destroying other structures to get there. In League of Legends, players are assigned to their individual roles: top, mid, jungle, adc, and support. (**show a map with the different roles labeled**), All champions have their unique abilities and players have to buy items with the gold they earned in each game. Also, the strength of each champion varies due to champion changes over time through updates and reworks.
+  
 
-In Leauge of Legends, players are assigned to their individual roles, and they use characters called champions. All champions have their unique characteristics and players have to buy items with the gold they earned in each game. The difference of this game from the other game is that every item will be gone after each game so that earning gold during the game is very important. Also, the strength of each champion varies because parameters of each champion are changing over time with updates.
+This game is being played by 27 million people per day as of 2014, which makes it one of the most popular games around the world. League of Legends has one of the most widespread and popular E-sports scenes with tournaments and championships being hosted all over the world. With a game this big, there is a massive amount of data on the game that is useful to both players and developers.
 
-Here, we are going to explain what the parameters we included in the information visualization, and why those are important for users. 
 
-First is gold. The amount of gold earned by the champion is very important for this game since user have to earn gold at every game to buy items.
+We designed and developed an information visualization that players can utilize to get information to help provide better experiences. Now, we are going to explain what the parameters we included in the information visualization, and why those are important for users. 
+
+First is gold. The amount of gold earned by the champion is very important for this game since players need gold to buy items that increase their strength throughout the match.
 7:17 - 7:27
 Second are kill, death, and assist. These three components are important to recognize specific champions' strengths and weaknesses.
 30:50 - 31:03
-Third are damage dealt with and taken by champions. This is very important to know to measure whether that champion was actually successful in the game as a member of the 
-team. 
+Third is damage dealt with and taken by champions. This is useful in identifying whether or not that champion was actually successful in the game as a member of the team. 
 8:39 - 8:49
 Fourth is KDA. This is an average of kill, death, and assist. KDA is important to determine champions current win rate.
 40:15 - 40:25
-Fifth is minions. This is a number of minions that champion killed. This is crucial since killing minions are the main source to earn gold.
+Fifth is the number of minions killed.  This is crucial since killing minions are one of the main sources for earning gold.
 31:50 - 32:00
-Sixth is healing. This is important to specify how much amount that champion healed.
+Sixth is healing. This is important to specify how much that champion healed and if certain champions have too much or too little healing power.
 10:30 - 10:40
-Seventh is a role. Every champion has recommended roles so that being able to filter by the role of champions are very important.
+Seventh is a role. The role is what part of the map the champion primarily plays on. Every champion has recommended roles so that being able to filter by the role of champions are very important.
 10:58 - 11:08
-The last one is items. Every items purchased during the game will be reset after the game, so that the purchase order and selection of items are crucial in this game.
+The last one is items. Items have a huge effect on the power and usefulness of your champion. A big portion of the strategy in League of Legends is crafting item builds for champions and roles. Ever items purchased during the game will be reset after the game, so that the purchase order and selection of items are crucial.
 37:30 - 37:40
 
-****TODO****
-WRITE SCRIPTS AFTER CODING IS DONE
+
+Our main visualization is a bubble chart in which each bubble represents a champion in the game and carries statistics along with it. The x and y axis can be changed to show many of the different pieces of game data I have described. The size of bubble shows the win rate for that champion. The bubbles are also color coded based on their role, indicated in the legend, and can be filtered based on the role. Each bubble also has a tooltip when you hover over it that tells you which champion it is along with other statistics.  
+
+Our second visualization can be activated by clicking on a bubble. Clicking on a bubble will bring up a pie chart of the 6 most purchased items for that champion. 
+
+Questions proposed in project plan: 
+
+1. What is the intended audience of this visualization? 
+
+	When thinking about the audience of this visualization there are two main groups a tool like this could be 	useful to. Do we want a visualization that developers can use to see outlier champions and help balance 		with? Or do we want a more player focused visualization that people can use to gain quick incites to 		current champions? In the end, as players, we felt like a tool for players to quickly access statistics 		would be incredibly useful to the community. 
+
+2. What do players need to see? 
+
+	Once we decided to focus on players as our users, we then had to think about what the players need to see. 	Realistically, players will be in champions select when they are making decisions on what champion to 		play. They are often trying to build a team composition around other players strengths and weaknesses. We 	decided that being able to change the x and y axis to focus on specific strengths and weaknesses you need 	for your team is essential in the utility of the tool.  
+
+3. How or when do players need to see this info? 
+
+	After players have use the main bubble chart to help them select their champion, they may want more 		information to help them in game. This is where the pie charts come in, and why they are viewed second. 		The pie charts display statistics on the items purchased in game by that champions. The pie chart shows 		the 8 most commonly purchased items purchased on that champion. Items are purchased throughout the game 		and being able to quickly access popular items purchased on your champion can help you make split second 		decisions on what to buy if a player is not sure. 
+
+4. How do we visualize item purchases? 
+
+	One of our toughest questions during project planning was how to visualize the items purchased. We 		originally thought a time series representation of when the items were purchased throughout the game would 	be effective. But the Riot API did not provide information on when the items were purchased in game. We 		considered a sunburst representation of the hierarchical item recipes but this was difficult and somewhat 	useless to the player. We decided on a pie chart as a simple way to show simple but crucial information. 		When it comes down to it, players want to know what are the best players building on this champion and 		then they can buy it in game. This pie chart will likely be something they want to look at quickly in game 	and making it difficult to click through with slow animations will make the cognitive processing time take 	longer than desired. 
+
+
+**Show a couple use cases**
+
+  
