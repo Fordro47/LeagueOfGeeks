@@ -1,6 +1,6 @@
 var margin = {top: 50, right: 20, bottom: 30, left: 80};
-var width = 900 - margin.left - margin.right;
-var height = 800 - margin.top - margin.bottom;
+var width = 850 - margin.left - margin.right;
+var height = 500 - margin.top - margin.bottom;
 
 // pre-cursors
 var sizeForCircle = function(d) {
@@ -203,15 +203,15 @@ d3.csv("league_data_item.csv", function(error, data) {
 
       })
       .on("click", function(d){
-           var w = 425,                        //width
+           var w = 400,                        //width
             h = 400,                            //height
-            r = 150;                            //radius
-            itemData = [{"label":"FirstItemName", "value":d.FirstItemPercent}, 
-                    {"label":"SecondItemName", "value":d.SecondItemPercent},
-                    {"label":"ThirdItemName", "value":d.ThirdItemPercent},
-                    {"label":"FourthItemName", "value":d.FourthItemPercent},
-                    {"label":"FifthItemName", "value":d.FifthItemPercent},
-                    {"label":"SixthItemName", "value":d.SixthItemPercent}];
+            r = 200;                            //radius
+            itemData = [{"label":d.FirstItemName, "value":d.FirstItemPercent}, 
+                    {"label":d.SecondItemName, "value":d.SecondItemPercent},
+                    {"label":d.ThirdItemName, "value":d.ThirdItemPercent},
+                    {"label":d.FourthItemName, "value":d.FourthItemPercent},
+                    {"label":d.FifthItemName, "value":d.FifthItemPercent},
+                    {"label":d.SixthItemName, "value":d.SixthItemPercent}];
             
             var vis = d3.select(".piechart")
                 .append("svg:svg")              //create the SVG element inside the <body>
@@ -240,7 +240,7 @@ d3.csv("league_data_item.csv", function(error, data) {
                         return "translate(" + arc.centroid(d) + ")";        //this gives us a pair of coordinates like [50, 50]
                     })
                     .attr("text-anchor", "middle")                          //center the text on it's origin
-                    .text(function(d, i) { return itemData[i].label; });      //get the label from our original data array
+                    .text(function(d, i) { return itemData[i].value; });      //get the label from our original data array
       });
 
   // Dynamic update y-axis variable
