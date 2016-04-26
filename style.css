@@ -8,7 +8,6 @@ body {
 }
 
 h1 {
-  font-weight: 300;
   color: #ffffff;
   font-size: 18px;
   margin: 25px 0px 25px 0px;
@@ -18,11 +17,10 @@ h1 {
 }
 
 h2 {
-  ffont-weight: 300;
   color: #ffffff;
-  font-size: 18px;
-  margin: 25px 0px 25px 0px;
+  font-size: 14px;
   padding: 0;
+  text-align: middle;
   text-transform: uppercase;
   font-weight: 700;
 }
@@ -54,10 +52,15 @@ h2 {
 }
 
 .piechart {
-  padding: 50px;
+  padding-top: 50px;
+  padding-bottom: 50px;
   border: 1px black;
 
 }
+.slice text {
+    font-size: 16pt;
+    font-family: Arial;
+}   
 
 .wrap {
   display: flex;
