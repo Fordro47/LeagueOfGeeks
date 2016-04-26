@@ -11,7 +11,7 @@ var sizeForCircle = function(d) {
 //Gets the value of the drop down menu
 //var statChoice = document.getElementById('selectElementId');
 // load data
-d3.csv("league_data_item.csv", function(error, data) {
+d3.csv("league_data_item_realdata.csv", function(error, data) {
   
   // change string (from CSV) into number format
   data.forEach(function(d) {
@@ -203,9 +203,9 @@ d3.csv("league_data_item.csv", function(error, data) {
 
       })
       .on("click", function(d){
-           var w = 400,                        //width
-            h = 400,                            //height
-            r = 200;                            //radius
+           var w = 200,                        //width
+            h = 200,                            //height
+            r = 100;                            //radius
             itemData = [{"label": d.FirstItemName, "value":d.FirstItemPercent}, 
                     {"label":d.SecondItemName, "value":d.SecondItemPercent},
                     {"label":d.ThirdItemName, "value":d.ThirdItemPercent},
