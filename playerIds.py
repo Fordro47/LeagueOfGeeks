@@ -22,15 +22,15 @@ players8 = players[70:80]
 players9 = players[80:90]
 players10 = players[90:100]
 
-print players1
-print players2
-print players3
-print players4
-print players5
-print players6
-print players7
-print players8
-print players9
-print players10
+# print players1
+# print players2
+# print players3
+# print players4
+# print players5
+# print players6
+# print players7
+# print players8
+# print players9
+# print players10
 
 
