@@ -50,12 +50,13 @@ h2 {
 }
 
 .scatterplot {
-  border: 1px solid red;
+  border: 1px black;
 }
 
 .piechart {
   padding: 50px;
-  border: 1px solid red;
+  border: 1px black;
+
 }
 
 .wrap {
