@@ -35,7 +35,7 @@ Questions proposed in project plan:
 
 1. What is the intended audience of this visualization? 
 
-	When thinking about the audience of this visualization there are two main groups a tool like this could be 	useful to. Do we want a visualization that developers can use to see outlier champions and help balance 		with? Or do we want a more player focused visualization that people can use to gain quick incites to 		current champions? In the end, as players, we felt like a tool for players to quickly access statistics 		would be incredibly useful to the community. 
+	When thin    king about the audience of this visualization there are two main groups a tool like this could be 	useful to. Do we want a visualization that developers can use to see outlier champions and help balance 		with? Or do we want a more player focused visualization that people can use to gain quick incites to 		current champions? In the end, as players, we felt like a tool for players to quickly access statistics 		would be incredibly useful to the community. 
 
 2. What do players need to see? 
 
