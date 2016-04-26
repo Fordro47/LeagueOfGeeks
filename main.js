@@ -8,6 +8,8 @@ var sizeForCircle = function(d) {
   return (d.winRate * d.winRate) * 60;
 }
 
+var halo;
+
 //Gets the value of the drop down menu
 //var statChoice = document.getElementById('selectElementId');
 // load data
@@ -183,8 +185,6 @@ d3.csv("league_data_item_realdata.csv", function(error, data) {
       .attr("cy", yMap)
       .style("fill", function(d) { return color(cValue(d));})
       .style("opacity", .7)
-      .on("click", click)
-      .on("dblclick", dblclick)
       .on("mouseover", function(d) {
         tooltip.transition()
             .duration(200)
@@ -204,49 +204,61 @@ d3.csv("league_data_item_realdata.csv", function(error, data) {
           // TODO: resize the nodes
 
       })
-      // .on("click", function(d){
-      //      var w = 200,                        //width
-      //       h = 200,                            //height
-      //       r = 100;                            //radius
-      //       itemData = [{"label": d.FirstItemName, "value":d.FirstItemPercent}, 
-      //               {"label":d.SecondItemName, "value":d.SecondItemPercent},
-      //               {"label":d.ThirdItemName, "value":d.ThirdItemPercent},
-      //               {"label":d.FourthItemName, "value":d.FourthItemPercent},
-      //               {"label":d.FifthItemName, "value":d.FifthItemPercent},
-      //               {"label":d.SixthItemName, "value":d.SixthItemPercent}];
+       .on("click", function(d){
+            //redraw dots (erase old halo)
+            d3.selectAll('circle').transition().duration(500).style("opacity", .7)
+              .style("stroke-width", 0);
+              
 
-      //       var element = document.getElementById("itemHeader");       
-      //       element.innerHTML = "Item Build Order: " + d.Name;
+            //draw halo on selected champ bubble
+            d3.select(this).transition()
+              .duration(750)
+              .style("opacity", 1)
+              .style("stroke", "white")
+              .style("stroke-width", 1);
+
+            var w = 200,                        //width
+              h = 200,                            //height
+              r = 100;                            //radius
+              itemData = [{"label": d.FirstItemName, "value":d.FirstItemPercent}, 
+                      {"label":d.SecondItemName, "value":d.SecondItemPercent},
+                      {"label":d.ThirdItemName, "value":d.ThirdItemPercent},
+                      {"label":d.FourthItemName, "value":d.FourthItemPercent},
+                      {"label":d.FifthItemName, "value":d.FifthItemPercent},
+                      {"label":d.SixthItemName, "value":d.SixthItemPercent}];
+
+            var element = document.getElementById("itemHeader");       
+            element.innerHTML = "Item Build Order: " + d.Name;
             
-      //       var vis = d3.select(".piechart")
-      //           .append("svg:svg")              //create the SVG element inside the <body>
-      //           .data([itemData])                   //associate our data with the document
-      //               .attr("width", w)           //set the width and height of our visualization (these will be attributes of the <svg> tag
-      //               .attr("height", h)
-      //           .append("svg:g")                //make a group to hold our pie chart
-      //               .attr("transform", "translate(" + r + "," + r + ")")    //move the center of the pie chart from 0, 0 to radius, radius
-      //       var arc = d3.svg.arc()              //this will create <path> elements for us using arc data
-      //           .outerRadius(r);
-      //       var pie = d3.layout.pie()           //this will create arc data for us given a list of values
-      //           .value(function(d) { return d.value; });    //we must tell it out to access the value of each element in our data array
-      //       var arcs = vis.selectAll("g.slice")     //this selects all <g> elements with class slice (there aren't any yet)
-      //           .data(pie)                          //associate the generated pie data (an array of arcs, each having startAngle, endAngle and value properties) 
-      //           .enter()                            //this will create <g> elements for every "extra" data element that should be associated with a selection. The result is creating a <g> for every object in the data array
-      //               .append("svg:g")                //create a group to hold each slice (we will have a <path> and a <text> element associated with each slice)
-      //                   .attr("class", "slice");    //allow us to style things in the slices (like text)
-      //           arcs.append("svg:path")
-      //                   .attr("fill", function(d, i) { return color(i); } ) //set the color for each slice to be chosen from the color function defined above
-      //                   .attr("d", arc);                                    //this creates the actual SVG path using the associated data (pie) with the arc drawing function
-      //           arcs.append("svg:text")                                     //add a label to each slice
-      //                   .attr("transform", function(d) {                    //set the label's origin to the center of the arc
-      //                   //we have to make sure to set these before calling arc.centroid
-      //                   d.innerRadius = 0;
-      //                   d.outerRadius = r;
-      //                   return "translate(" + arc.centroid(d) + ")";        //this gives us a pair of coordinates like [50, 50]
-      //               })
-      //               .attr("text-anchor", "middle")                          //center the text on it's origin
-      //               .text(function(d, i) { return itemData[i].label + ": " + itemData[i].value + "%"; });      //get the label from our original data array
-      // });
+            var vis = d3.select(".piechart")
+                .append("svg:svg")              //create the SVG element inside the <body>
+                .data([itemData])                   //associate our data with the document
+                    .attr("width", w)           //set the width and height of our visualization (these will be attributes of the <svg> tag
+                    .attr("height", h)
+                .append("svg:g")                //make a group to hold our pie chart
+                    .attr("transform", "translate(" + r + "," + r + ")")    //move the center of the pie chart from 0, 0 to radius, radius
+            var arc = d3.svg.arc()              //this will create <path> elements for us using arc data
+                .outerRadius(r);
+            var pie = d3.layout.pie()           //this will create arc data for us given a list of values
+                .value(function(d) { return d.value; });    //we must tell it out to access the value of each element in our data array
+            var arcs = vis.selectAll("g.slice")     //this selects all <g> elements with class slice (there aren't any yet)
+                .data(pie)                          //associate the generated pie data (an array of arcs, each having startAngle, endAngle and value properties) 
+                .enter()                            //this will create <g> elements for every "extra" data element that should be associated with a selection. The result is creating a <g> for every object in the data array
+                    .append("svg:g")                //create a group to hold each slice (we will have a <path> and a <text> element associated with each slice)
+                        .attr("class", "slice");    //allow us to style things in the slices (like text)
+                arcs.append("svg:path")
+                        .attr("fill", function(d, i) { return color(i); } ) //set the color for each slice to be chosen from the color function defined above
+                        .attr("d", arc);                                    //this creates the actual SVG path using the associated data (pie) with the arc drawing function
+                arcs.append("svg:text")                                     //add a label to each slice
+                        .attr("transform", function(d) {                    //set the label's origin to the center of the arc
+                        //we have to make sure to set these before calling arc.centroid
+                        d.innerRadius = 0;
+                        d.outerRadius = r;
+                        return "translate(" + arc.centroid(d) + ")";        //this gives us a pair of coordinates like [50, 50]
+                    })
+                    .attr("text-anchor", "middle")                          //center the text on it's origin
+                    .text(function(d, i) { return itemData[i].label + ": " + itemData[i].value + "%"; });      //get the label from our original data array
+      });
 
   // Dynamic update y-axis variable
   function yChange() {
@@ -306,21 +318,21 @@ d3.csv("league_data_item_realdata.csv", function(error, data) {
     }
   }
 
-  function click() {
-    d3.select(this).transition()
-        .duration(750)
-        .style("opacity", 1)
-        .style("stroke", "white"); 
-}
+//   function click() {
+//     d3.select(this).transition()
+//         .duration(750)
+//         .style("opacity", 1)
+//         .style("stroke", "white"); 
+// }
 
-// action to take on mouse double click
-function dblclick() {
-    d3.select(this).transition()
-        .duration(750)
-        .style("opacity", .7)
-        .style("stroke-width", 0)
-        //.style("stroke", ); 
-}
+// // action to take on mouse double click
+// function dblclick() {
+//     d3.select(this).transition()
+//         .duration(750)
+//         .style("opacity", .7)
+//         .style("stroke-width", 0)
+//         //.style("stroke", ); 
+// }
 
   // function zoom() {
   //   circle.attr("transform", transform);
