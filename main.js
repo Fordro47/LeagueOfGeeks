@@ -8,6 +8,7 @@ var sizeForCircle = function(d) {
   return (d.winRate * d.winRate) * 60;
 }
 
+
 //Gets the value of the drop down menu
 //var statChoice = document.getElementById('selectElementId');
 // load data
@@ -138,8 +139,8 @@ d3.csv("league_data_item_realdata.csv", function(error, data) {
 
 
   // don't want dots overlapping axis, so add in buffer to data domain
- // xScale.domain([d3.min(data, xValue)-1, d3.max(data, xValue)+1]);
- // yScale.domain([d3.min(data, yValue)-1, d3.max(data, yValue)+1]);
+  xScale.domain([d3.min(data, xValue)-1, d3.max(data, xValue)+1]);
+  yScale.domain([d3.min(data, yValue)-1, d3.max(data, yValue)+1]);
 
   // x-axis
   svg.append("g")
@@ -202,19 +203,35 @@ d3.csv("league_data_item_realdata.csv", function(error, data) {
           // TODO: resize the nodes
 
       })
-      .on("click", function(d){
-           var w = 200,                        //width
-            h = 200,                            //height
-            r = 100;                            //radius
-            itemData = [{"label": d.FirstItemName, "value":d.FirstItemPercent}, 
-                    {"label":d.SecondItemName, "value":d.SecondItemPercent},
-                    {"label":d.ThirdItemName, "value":d.ThirdItemPercent},
-                    {"label":d.FourthItemName, "value":d.FourthItemPercent},
-                    {"label":d.FifthItemName, "value":d.FifthItemPercent},
-                    {"label":d.SixthItemName, "value":d.SixthItemPercent}];
+       .on("click", function(d){
+            //redraw dots (erase old halo)
+            d3.selectAll('circle').transition().duration(500).style("opacity", .7)
+              .style("stroke-width", 0);
+              
+
+            //draw halo on selected champ bubble
+            d3.select(this).transition()
+              .duration(750)
+              .style("opacity", 1)
+              .style("stroke", "white")
+              .style("stroke-width", 1);
+
+            //Erase old pie chart
+            d3.select(".piechart").selectAll("svg").remove();
+
+            var w = 400,                        //width
+              h = 400,                            //height
+              r = 200;                            //radius
+              itemData = [{"label": d.FirstItemName, "value":d.FirstItemPercent}, 
+                      {"label":d.SecondItemName, "value":d.SecondItemPercent},
+                      {"label":d.ThirdItemName, "value":d.ThirdItemPercent},
+                      {"label":d.FourthItemName, "value":d.FourthItemPercent},
+                      {"label":d.FifthItemName, "value":d.FifthItemPercent},
+                      {"label":d.SixthItemName, "value":d.SixthItemPercent}];
 
             var element = document.getElementById("itemHeader");       
             element.innerHTML = "Item Build Order: " + d.Name;
+
             
             var vis = d3.select(".piechart")
                 .append("svg:svg")              //create the SVG element inside the <body>
@@ -304,6 +321,22 @@ d3.csv("league_data_item_realdata.csv", function(error, data) {
     }
   }
 
+//   function click() {
+//     d3.select(this).transition()
+//         .duration(750)
+//         .style("opacity", 1)
+//         .style("stroke", "white"); 
+// }
+
+// // action to take on mouse double click
+// function dblclick() {
+//     d3.select(this).transition()
+//         .duration(750)
+//         .style("opacity", .7)
+//         .style("stroke-width", 0)
+//         //.style("stroke", ); 
+// }
+
   // function zoom() {
   //   circle.attr("transform", transform);
   // }
@@ -322,7 +355,7 @@ d3.csv("league_data_item_realdata.csv", function(error, data) {
   // draw legend colored rectangles
   legend.append("rect")
       .attr("x", width - 18)
-      .attr("y", -53)
+      .attr("y", +280)
       .attr("width", 18)
       .attr("height", 18)
       .style("fill", color);
@@ -330,7 +363,7 @@ d3.csv("league_data_item_realdata.csv", function(error, data) {
   // draw legend text
   legend.append("text")
       .attr("x", width - 24)
-      .attr("y", -45)
+      .attr("y", +288)
       .attr("dy", ".35em")
       .attr("fill", "white")
       .style("text-anchor", "end")
