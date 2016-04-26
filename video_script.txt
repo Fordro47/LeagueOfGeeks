@@ -27,12 +27,11 @@ Seventh is a role. The role is what part of the map the champion primarily plays
 The last one is items. Items have a huge effect on the power and usefulness of your champion. A big portion of the strategy in League of Legends is crafting item builds for champions and roles. Ever items purchased during the game will be reset after the game, so that the purchase order and selection of items are crucial.(10 sec)
 37:30 - 37:40
 
+Our main visualization is a bubble chart in which each bubble represents a champion in the game and carries statistics along with it. The x and y axis can be changed to show many of the different pieces of game data I have described. The size of bubble shows the win rate for that champion. The bubbles are also color coded based on their role, indicated in the legend, and can be filtered based on the role. Each bubble also has a tooltip when you hover over it that tells you which champion it is along with other statistics.(28 sec)
 
-Our main visualization is a bubble chart in which each bubble represents a champion in the game and carries statistics along with it. The x and y axis can be changed to show many of the different pieces of game data I have described. The size of bubble shows the win rate for that champion. The bubbles are also color coded based on their role, indicated in the legend, and can be filtered based on the role. Each bubble also has a tooltip when you hover over it that tells you which champion it is along with other statistics.
+Our second visualization can be activated by clicking on a bubble. Clicking on a bubble will bring up a pie chart of the 6 most purchased items for that champion.(10 sec)
 
-Our second visualization can be activated by clicking on a bubble. Clicking on a bubble will bring up a pie chart of the 6 most purchased items for that champion. 
-
-Questions proposed in project plan: 
+Questions proposed in project plan:
 
 1. What is the intended audience of this visualization? 
 
