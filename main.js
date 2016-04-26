@@ -8,7 +8,6 @@ var sizeForCircle = function(d) {
   return (d.winRate * d.winRate) * 60;
 }
 
-var halo;
 
 //Gets the value of the drop down menu
 //var statChoice = document.getElementById('selectElementId');
@@ -217,9 +216,12 @@ d3.csv("league_data_item_realdata.csv", function(error, data) {
               .style("stroke", "white")
               .style("stroke-width", 1);
 
-            var w = 200,                        //width
-              h = 200,                            //height
-              r = 100;                            //radius
+            //Erase old pie chart
+            d3.select(".piechart").selectAll("svg").remove();
+
+            var w = 400,                        //width
+              h = 400,                            //height
+              r = 200;                            //radius
               itemData = [{"label": d.FirstItemName, "value":d.FirstItemPercent}, 
                       {"label":d.SecondItemName, "value":d.SecondItemPercent},
                       {"label":d.ThirdItemName, "value":d.ThirdItemPercent},
@@ -229,6 +231,7 @@ d3.csv("league_data_item_realdata.csv", function(error, data) {
 
             var element = document.getElementById("itemHeader");       
             element.innerHTML = "Item Build Order: " + d.Name;
+
             
             var vis = d3.select(".piechart")
                 .append("svg:svg")              //create the SVG element inside the <body>
